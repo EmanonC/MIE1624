@@ -7,7 +7,7 @@ from sql.models import IndeedJobTable,JobDescibtion,JobRequirementDescibtion
 class sql_helper:
     def __init__(self):
         self.db=declarative_base()
-        self.engine=create_engine('mysql+pymysql://root:password@localhost/MIE1624', encoding='utf-8',echo=True)
+        self.engine=create_engine('mysql+pymysql://root:F=mdv/dt123@localhost/MIE1624', encoding='utf-8',echo=True)
         self.DBSession = sessionmaker(bind=self.engine)
         self.db=self.DBSession()
 

@@ -28,6 +28,6 @@ class JobRequirementDescibtion(Base):
 
 if __name__ == '__main__':
 
-    engine=create_engine('mysql+pymysql://root:password@localhost/MIE1624', encoding='utf-8',echo=True)
+    engine=create_engine('mysql+pymysql://root:F=mdv/dt123@localhost/MIE1624', encoding='utf-8',echo=True)
     DBSession = sessionmaker(bind=engine)
     Base.metadata.create_all(engine)
