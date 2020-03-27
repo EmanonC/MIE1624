@@ -8,7 +8,7 @@ for i in range(26):
     file=f"/Users/yilunhuang/Desktop/Arduino/NSEmu/MIE1624/Data/{chr(i+65)}.txt"
     words=pd.read_table(file,header=None)
     words=list(words[0])
-    words=[str(w) for w in words]
+    words=[str(w).lower() for w in words]
     skillList+=words
 
 df=pd.read_csv("/Users/yilunhuang/Desktop/Arduino/NSEmu/MIE1624/job_requirement_describtion.csv",header=None)
@@ -20,8 +20,9 @@ requirementDF=df[2]
 async def compare_skills(DF,skillList):
     matchedSkill=[]
     for i in range(len(DF)):
-        requirement=str(DF.iloc[i])
-        # requirement=str(DF.iloc[i]).split(' ')
+        # requirement=str(DF.iloc[i]).lower()
+        requirement=str(DF.iloc[i]).split(' ')
+        requirement=[_.lower() for _ in requirement]
         for skill in skillList:
             if skill in requirement:
                 matchedSkill.append(skill)
@@ -49,4 +50,4 @@ data=[]
 for i in skillCounter:
     data.append([i,skillCounter[i]])
 df=pd.DataFrame(data=data,columns=['skill','count'])
-df.to_csv('whole_skills.csv')
+df.to_csv('single_skills.csv')
