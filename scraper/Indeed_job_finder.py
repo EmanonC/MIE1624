@@ -7,11 +7,12 @@ def soup_content(soup):
     html = soup.content
     return BeautifulSoup(html, 'html.parser')
 helper=sql_helper()
+#Search Indeed Jobs
 url0="https://ca.indeed.com/jobs?q=data+science&l=Toronto,+ON&start="
 n=100
 type="data science"
 
-
+#Get the job url from indded
 for i in range(n):
     url=url0+"{}".format(i*10)
     soup = requests.get(url=url)

@@ -8,13 +8,13 @@ def soup_content(soup):
     return BeautifulSoup(html, 'html.parser')
 helper=sql_helper()
 
-# helper.add_Job_Descriptioncription(herf='1',job_name='1',company_name='1',requirements=['123','321'])
 
 IndeedJobList=helper.get_indeed_jobs()
 cnt=0
 tot=len(IndeedJobList)
 
 for IndeedJob in IndeedJobList:
+    #For each job found previously, go to the website and store the job informations
     url=jobHref=IndeedJob.herf
     if "https://ca.indeed.com" not in url:
         url="https://ca.indeed.com"+url
@@ -29,8 +29,10 @@ for IndeedJob in IndeedJobList:
         cnt+=1
         continue
     JobContent=soup.find('div',attrs={"class":"jobsearch-ViewJobLayout-jobDisplay"})
+    #Find the requirements
     req_list=JobContent.find_all('li')
     req_list_string=[_.getText() for _ in req_list]
+    #Add job info to database
     helper.add_Job_Description(href=jobHref,job_name=job_name,company_name=company_name,requirements=req_list_string)
     helper.set_indeed_job_is_scrp(IndeedJob)
     cnt+=1

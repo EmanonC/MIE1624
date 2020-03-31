@@ -15,12 +15,11 @@ df=pd.read_csv("/Users/yilunhuang/Desktop/Arduino/NSEmu/MIE1624/job_requirement_
 
 requirementDF=df[2]
 
-# print(requirementDF)
-
+#compare_skills function matches skills from database with job requirements string
+#The skills pool is too large, so we use compare_skills function to filtering data-science irrelative skills
 async def compare_skills(DF,skillList):
     matchedSkill=[]
     for i in range(len(DF)):
-        # requirement=str(DF.iloc[i]).lower()
         requirement=str(DF.iloc[i]).split(' ')
         requirement=[_.lower() for _ in requirement]
         for skill in skillList:
@@ -33,7 +32,6 @@ tasknum=10
 
 start=0
 while start+tasknum*num<len(requirementDF):
-# while start+tasknum*num<2000:
     print(start)
     tasks = []
     for i in range(tasknum):
@@ -44,8 +42,6 @@ while start+tasknum*num<len(requirementDF):
     results=results[0]
     for result in results:
         skillCounter.update(result.result())
-    # loop.close()
-# print(skillCounter)
 data=[]
 for i in skillCounter:
     data.append([i,skillCounter[i]])
